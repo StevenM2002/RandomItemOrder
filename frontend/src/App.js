@@ -3,7 +3,7 @@ import FrontPage from './frontpage/frontpage.js';
 
 function App() {
   return (
-    <div class="overall-font" >
+    <div className="overall-font" >
       <FrontPage />
     </div>
   )  
