@@ -6,34 +6,46 @@ import circularMinusLogo from "./frontPageImages/circularMinus.png";
 export default function AddItemForm(props) {
   const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
   const [inputValues, setInputValues] = useState([]);
+  const [firstValue, setFirstValue] = useState("");
 
   // Make sure the value inside the textbox is the actual value after deletion
   function getValue(id) {
     const index = renderedInputsIndex.indexOf(id);
-    const value = inputValues[index];
-    return value;
+    return inputValues[index];
   }
 
   const myInput = (id) => (
     <div style={myInputStyle}>
       <input
         id={id}
-        type="Text"
-        placeholder="Hello"
-        onChange={onChange}
+        onChange={onTextChange}
         value={getValue(id)}
+        type="text"
+        placeholder="Enter your item here!"
       />
       <button
         id={id}
-        type="button"
         onClick={removeLastInput}
-        className="circle-button"
         style={myRemoveButtonStyle}
+        type="button"
+        className="circle-button"
       >
-        {id}
       </button>
     </div>
   );
+
+  const firstInputField = (
+  	<input
+        id="first"
+        onChange={(e) => {
+        	e.preventDefault();
+        	setFirstValue(e.target.value);
+        }}
+        value={firstValue}
+        type="text"
+        placeholder="Enter your item here!"
+      />
+	)
 
   // Add input elements in the form
   const addNewInput = function (e) {
@@ -67,16 +79,14 @@ export default function AddItemForm(props) {
     let newArr = [...inputValues];
     newArr.splice(index, 1);
     setInputValues(newArr);
-    console.log(newArr);
   }
 
-  function onChange(e) {
+  function onTextChange(e) {
     e.preventDefault();
     const index = renderedInputsIndex.indexOf(parseInt(e.target.id));
     let newInputValues = [...inputValues];
     newInputValues[index] = e.target.value;
     setInputValues(newInputValues);
-    console.log(newInputValues);
   }
 
   const renderToJsx = renderedInputsIndex.map((i) => {
@@ -85,6 +95,7 @@ export default function AddItemForm(props) {
 
   return (
     <form className="form-container">
+    	{firstInputField}
       {renderToJsx}
       <button
         className="circle-button"

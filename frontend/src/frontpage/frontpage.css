@@ -37,7 +37,7 @@ button {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: auto;
   justify-content: center;
 }
 
@@ -52,13 +52,13 @@ button {
   grid-column: 1/-1;
   background-color: aliceblue;
   padding: 2rem;
+  max-height: 10vh;
 }
 
 .main-content-container {
   display: flex;
   grid-column: 2/7;
   grid-row: 2/-1;
-  border: solid;
   align-items: center;
   flex-direction: column;
 }
