@@ -1,35 +1,87 @@
 import "./frontpage.css";
-import { useEffect, useState } from "react";
-import { render } from "@testing-library/react";
-import { renderIntoDocument } from "react-dom/test-utils";
+import { useState } from "react";
+import circularPlusLogo from "./frontPageImages/circularPlus.png";
+import circularMinusLogo from "./frontPageImages/circularMinus.png";
 
 export default function AddItemForm(props) {
-  const myInput = (index) => (
-    <>
-      <input id={index} type="Text" placeholder="Hello" />
-      <button id={index} type="button" onClick={removeLastInput}>{index}</button>
-    </>
+  const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
+  const [inputValues, setInputValues] = useState([]);
+
+  // Make sure the value inside the textbox is the actual value after deletion
+  function getValue(id) {
+    const index = renderedInputsIndex.indexOf(id);
+    const value = inputValues[index];
+    return value;
+  }
+
+  const myInput = (id) => (
+    <div style={myInputStyle}>
+      <input
+        id={id}
+        type="Text"
+        placeholder="Hello"
+        onChange={onChange}
+        value={getValue(id)}
+      />
+      <button
+        id={id}
+        type="button"
+        onClick={removeLastInput}
+        className="circle-button"
+        style={myRemoveButtonStyle}
+      >
+        {id}
+      </button>
+    </div>
   );
 
-  // Add or remove input elements in the form
-  const [renderedInputs, setRenderedInputs] = useState([{inputElement: myInput(0), id: 0}]);
-
+  // Add input elements in the form
   const addNewInput = function (e) {
     e.preventDefault();
-    let newInputs = [...renderedInputs];
-    newInputs.push(myInput(newInputs.length));
-    setRenderedInputs(newInputs);
+    const newInputsIndex = [...renderedInputsIndex];
+    if (newInputsIndex.length !== 0) {
+      newInputsIndex.push(newInputsIndex[newInputsIndex.length - 1] + 1);
+    } else {
+      newInputsIndex.push(1);
+    }
+    const newInputValues = [...inputValues, ""];
+    setInputValues(newInputValues);
+    setRenderedInputsIndex(newInputsIndex);
   };
 
+  // Remove an input
   function removeLastInput(e) {
     e.preventDefault();
-     newInputs = [...renderedInputs];
-    const newInputs = renderedInputs.filter((item) => item.id !== e.target.id);
-    console.log("test");
-    setRenderedInputs(newInputs);
-  };
+    let newInputsIndex = [...renderedInputsIndex];
+    renderedInputsIndex.forEach((id) => {
+      if (String(id) === e.target.id) {
+        const index = newInputsIndex.indexOf(id);
+        newInputsIndex.splice(index, 1);
+        removeFromInputValues(index);
+      }
+    });
+    setRenderedInputsIndex(newInputsIndex);
+  }
 
-  const renderToJsx = () => renderedInputs.map((item) => item.inputElement);
+  function removeFromInputValues(index) {
+    let newArr = [...inputValues];
+    newArr.splice(index, 1);
+    setInputValues(newArr);
+    console.log(newArr);
+  }
+
+  function onChange(e) {
+    e.preventDefault();
+    const index = renderedInputsIndex.indexOf(parseInt(e.target.id));
+    let newInputValues = [...inputValues];
+    newInputValues[index] = e.target.value;
+    setInputValues(newInputValues);
+    console.log(newInputValues);
+  }
+
+  const renderToJsx = renderedInputsIndex.map((i) => {
+    return myInput(i);
+  });
 
   return (
     <form className="form-container">
@@ -37,14 +89,23 @@ export default function AddItemForm(props) {
       <button
         className="circle-button"
         onClick={addNewInput}
-        style={myButtonStyle}
+        style={myAddButtonStyle}
       ></button>
     </form>
   );
 }
 
-const myButtonStyle = {
-  backgroundImage:
-    "url(https://cdn.icon-icons.com/icons2/1919/PNG/512/circularplusbutton_121982.png)",
+const myAddButtonStyle = {
+  backgroundImage: `url(${circularPlusLogo})`,
   backgroundSize: "cover",
+};
+
+const myRemoveButtonStyle = {
+  backgroundImage: `url(${circularMinusLogo})`,
+  backgroundSize: "cover",
+};
+
+const myInputStyle = {
+  display: "grid",
+  gridTemplateColumns: "100% auto",
 };
