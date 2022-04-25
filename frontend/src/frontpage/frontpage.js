@@ -3,6 +3,7 @@ import "./frontpage.css";
 import TitleBanner from "./titleBanner";
 import AddItemForm from "./addItemForm";
 import Instructions from "./instructions";
+import GetRandomPositions from "./getRandomPositions";
 
 export default function FrontPage(props) {
   return (
@@ -11,6 +12,9 @@ export default function FrontPage(props) {
       <div className="main-content-container">
         <Instructions />
         <AddItemForm />
+      </div>
+      <div>
+        <GetRandomPositions />
       </div>
     </div>
   );

@@ -29,23 +29,22 @@ export default function AddItemForm(props) {
         style={myRemoveButtonStyle}
         type="button"
         className="circle-button"
-      >
-      </button>
+      ></button>
     </div>
   );
 
   const firstInputField = (
-  	<input
-        id="first"
-        onChange={(e) => {
-        	e.preventDefault();
-        	setFirstValue(e.target.value);
-        }}
-        value={firstValue}
-        type="text"
-        placeholder="Enter your item here!"
-      />
-	)
+    <input
+      id="first"
+      onChange={(e) => {
+        e.preventDefault();
+        setFirstValue(e.target.value);
+      }}
+      value={firstValue}
+      type="text"
+      placeholder="Enter your item here!"
+    />
+  );
 
   // Add input elements in the form
   const addNewInput = function (e) {
@@ -95,7 +94,7 @@ export default function AddItemForm(props) {
 
   return (
     <form className="form-container">
-    	{firstInputField}
+      {firstInputField}
       {renderToJsx}
       <button
         className="circle-button"
