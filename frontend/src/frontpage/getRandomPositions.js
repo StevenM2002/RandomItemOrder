@@ -26,14 +26,15 @@ export default function GetRandomPosition(unchangedItems, setRes) {
 
 //This following function is for non-api usage
 export default function GetRandomPosition(unchangedItems, setRes) {
-  const shuffledItems = doShuffle(unchangedItems);
+  const trimmedUnchangedItems = unchangedItems.filter(item => item !== "");
+  const shuffledItems = doShuffle(trimmedUnchangedItems);
   setRes(shuffledItems);
 }
 function doShuffle(array) {
   let currentIndex = array.length,  randomIndex;
 
   // While there remain elements to shuffle.
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
 
     // Pick a remaining element.
     randomIndex = Math.floor(Math.random() * currentIndex);
