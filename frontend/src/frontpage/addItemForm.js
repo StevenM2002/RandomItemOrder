@@ -1,13 +1,11 @@
 import "./frontpage.css";
-import { useState } from "react";
 import circularPlusLogo from "./frontPageImages/circularPlus.png";
 import circularMinusLogo from "./frontPageImages/circularMinus.png";
 
-export default function AddItemForm(props) {
-  const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
-  const [inputValues, setInputValues] = useState([]);
-  const [firstValue, setFirstValue] = useState("");
-
+export default function AddItemForm({ renderedInputsIndex, setRenderedInputsIndex, inputValues, setInputValues, firstValue, setFirstValue }) {
+//  const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
+//  const [inputValues, setInputValues] = useState([]);
+//  const [firstValue, setFirstValue] = useState("");
   // Make sure the value inside the textbox is the actual value after deletion
   function getValue(id) {
     const index = renderedInputsIndex.indexOf(id);
@@ -88,7 +86,7 @@ export default function AddItemForm(props) {
     setInputValues(newInputValues);
   }
 
-  const renderToJsx = renderedInputsIndex.map((i) => {
+  const renderToJsx = renderedInputsIndex?.map((i) => {
     return myInput(i);
   });
 
