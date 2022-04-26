@@ -4,7 +4,7 @@ import GetRandomPositions from "./randomPositionsFunctionality/getRandomPosition
 
 // Setup app
 const app = express();
-const PORT = 5000;
+const PORT = 3000;
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 
 // Middleware
