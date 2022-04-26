@@ -114,7 +114,8 @@ export default function AddItemForm({
     e.preventDefault();
     setFirstValue("");
     const otherValues = inputValues;
-    setInputValues(otherValues.map((item) => ""))
+    setInputValues([]);
+    setRenderedInputsIndex([]);
   }
 
   return (
@@ -122,7 +123,7 @@ export default function AddItemForm({
       {firstInputField}
       {renderToJsx}
       <div style={{display:"flex"}}>
-        <button onClick={handleClearFields}>
+        <button type="button" onClick={handleClearFields}>
           Clear my tasks
         </button>
         <button

@@ -19,11 +19,17 @@ export default function ShowResults({
       </ol>
     )
   }
-
+  const noItemsTextStyle = {
+    textAlign:"center",
+    marginTop:"30%",
+    marginBottom:"30%"
+  }
   const noItemsText = (
-    <h2 style={{marginTop: "25%"}}>
-      You have to add a task for us to decide the order!
-    </h2>
+    <div style={noItemsTextStyle}>
+      <h2>
+        You have to add a task for us to decide the order!
+      </h2>
+    </div>
   )
 
   return (
