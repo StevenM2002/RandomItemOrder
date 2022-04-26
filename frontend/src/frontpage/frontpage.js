@@ -4,6 +4,7 @@ import TitleBanner from "./titleBanner";
 import AddItemForm from "./addItemForm";
 import Instructions from "./instructions";
 import GetRandomPositions from "./getRandomPositions";
+import ShowResults from "./showResults";
 
 
 export default function FrontPage(props) {
@@ -13,30 +14,32 @@ export default function FrontPage(props) {
   const [firstValue, setFirstValue] = useState("");
   const [shuffledItems, setShuffledItems] = useState([]);
   
-  useEffect(() => {
-    const unchangedItems = [firstValue, ...inputValues];
-    GetRandomPositions(unchangedItems, shuffledItems, setShuffledItems);
-  }, [inputValues, firstValue]);
-  console.log(shuffledItems);
+  // useEffect(() => {
+  //   const unchangedItems = [firstValue, ...inputValues];
+  //   GetRandomPositions(unchangedItems, shuffledItems, setShuffledItems);
+  // }, [inputValues, firstValue]);
+  // console.log(shuffledItems);
 
 
   return (
-    <div className="grid-container">
-      <TitleBanner />
-      <div className="main-content-container">
-        <Instructions />
-        <AddItemForm
-          renderedInputsIndex={renderedInputsIndex}
-          setRenderedInputsIndex={setRenderedInputsIndex}
-          inputValues={inputValues}
-          setInputValues={setInputValues}
-          firstValue={firstValue}
-          setFirstValue={setFirstValue}
-        />
+    <>
+      <div className="grid-container">
+        <TitleBanner />
+        <div className="main-content-container">
+          <Instructions />
+          <AddItemForm
+            renderedInputsIndex={renderedInputsIndex}
+            setRenderedInputsIndex={setRenderedInputsIndex}
+            inputValues={inputValues}
+            setInputValues={setInputValues}
+            firstValue={firstValue}
+            setFirstValue={setFirstValue}
+          />
+        </div>
       </div>
       <div>
-        {shuffledItems.map((item) => <p>{item}</p>)}
+        <ShowResults />
       </div>
-    </div>
+    </>
   );
 }

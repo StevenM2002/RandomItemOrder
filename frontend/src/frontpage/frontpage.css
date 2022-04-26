@@ -69,3 +69,39 @@ button {
   min-width: 50%;
   flex-direction: column;
 }
+
+.popup-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(210, 210, 210, 0.8);
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+}
+
+.center-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  z-index: 200;
+}
+
+.popup-content-container {
+  border-radius: 15px;
+  max-height: 80vh;
+  min-height: 40vh;
+  width: 40vw;
+  overflow: auto;
+  background-color: white;
+  margin: 16px;
+}
+
+.top-right {
+  position: fixed;
+  left: 69vw;
+  z-index: 300;
+  margin: auto;
+}
