@@ -10,9 +10,21 @@ export default function ShowResults({
     setIsShowResults(false);
   }
 
-  function doNothing(e) {
-    console.log("Fuck you");
+  function shuffledItemToJSX() {
+    return(
+      <ol>
+        {shuffledItems.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ol>
+    )
   }
+
+  const noItemsText = (
+    <h2 style={{marginTop: "25%"}}>
+      You have to add a task for us to decide the order!
+    </h2>
+  )
 
   return (
   	<div>
@@ -28,23 +40,13 @@ export default function ShowResults({
           >
           </button>
 	  			<div className="popup-content-container">
-	  				<ol>
-		  				{shuffledItems.map((item) => (
-	              <li style={myListStyle} >{item}</li>
-	            ))}
-            </ol>
+            {shuffledItems.length === 0 ? noItemsText : shuffledItemToJSX()}
 	  			</div>
   			</div>
   		</div>
 
   	</div>
   );
-}
-
-const myListStyle = {
-	// borderTop:"solid",
-  // borderBottom:"solid"
-  justifyContent:"flexStart"
 }
 
 const closeButtonStyle = {

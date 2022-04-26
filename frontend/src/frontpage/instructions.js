@@ -1,7 +1,7 @@
 export default function Instructions(props) {
   return (
     <div style={instructionsStyle}>
-      <h2>Add an item to begin!</h2>
+      <h2>Add a task to begin!</h2>
     </div>
   );
 }

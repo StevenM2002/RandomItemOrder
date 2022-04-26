@@ -29,7 +29,7 @@ export default function AddItemForm({
         onChange={onTextChange}
         value={getValue(id)}
         type="text"
-        placeholder="Enter your item here!"
+        placeholder="Enter your task here!"
       />
       <button
         id={id}
@@ -50,7 +50,8 @@ export default function AddItemForm({
       }}
       value={firstValue}
       type="text"
-      placeholder="Enter your item here!"
+      placeholder="Enter your task here!"
+      required
     />
   );
 
@@ -108,17 +109,30 @@ export default function AddItemForm({
     GetRandomPositions(unchangedItems, setShuffledItems);
   }
 
+  // Clear fields of all inputs
+  function handleClearFields(e) {
+    e.preventDefault();
+    setFirstValue("");
+    const otherValues = inputValues;
+    setInputValues(otherValues.map((item) => ""))
+  }
+
   return (
     <form className="form-container" autoComplete="off">
       {firstInputField}
       {renderToJsx}
-      <button
-        key={"addNewInputButton"}
-        className="circle-button"
-        onClick={addNewInput}
-        style={myAddButtonStyle}
-        type="button"
-      ></button>
+      <div style={{display:"flex"}}>
+        <button onClick={handleClearFields}>
+          Clear my tasks
+        </button>
+        <button
+          key={"addNewInputButton"}
+          className="circle-button"
+          onClick={addNewInput}
+          style={myAddButtonStyle}
+          type="button"
+        ></button>
+      </div>
       <button type="submit" style={mySubmitButtonStyle} onClick={onSubmit}>
         Get your task order!
       </button>
@@ -129,6 +143,7 @@ export default function AddItemForm({
 const myAddButtonStyle = {
   backgroundImage: `url(${circularPlusLogo})`,
   backgroundSize: "cover",
+  marginLeft:"auto"
 };
 
 const myRemoveButtonStyle = {
