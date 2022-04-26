@@ -11,13 +11,13 @@ app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Test routes
 app.get("/test", (req, res) => test(req, res));
-
-app.post("/getRandomPositions", (req, res) => GetRandomPositions(req, res));
-
 function test(req, res) {
 	res.status(200).send({
 		"Hello": "Hello"
 	})
 }
+
+// Routes
+app.post("/getRandomPositions", (req, res) => GetRandomPositions(req, res));
