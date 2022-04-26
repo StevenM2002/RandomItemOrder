@@ -1,5 +1,6 @@
 const apiRoute = "http://localhost:5000/getRandomPositions";
-
+/*
+// The following function is for api usage
 export default function GetRandomPosition(unchangedItems, setRes) {
   const unchangedArray = {
     unchangedItems: unchangedItems,
@@ -20,4 +21,28 @@ export default function GetRandomPosition(unchangedItems, setRes) {
   }
 
   retriveRandomPositions();
+}
+*/
+
+//This following function is for non-api usage
+export default function GetRandomPosition(unchangedItems, setRes) {
+  const shuffledItems = doShuffle(unchangedItems);
+  setRes(shuffledItems);
+}
+function doShuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
 }
