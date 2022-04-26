@@ -6,20 +6,12 @@ import Instructions from "./instructions";
 import GetRandomPositions from "./getRandomPositions";
 import ShowResults from "./showResults";
 
-
 export default function FrontPage(props) {
-
   const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
   const [inputValues, setInputValues] = useState([]);
   const [firstValue, setFirstValue] = useState("");
   const [shuffledItems, setShuffledItems] = useState([]);
-  
-  // useEffect(() => {
-  //   const unchangedItems = [firstValue, ...inputValues];
-  //   GetRandomPositions(unchangedItems, shuffledItems, setShuffledItems);
-  // }, [inputValues, firstValue]);
-  // console.log(shuffledItems);
-
+  const [isShowResults, setIsShowResults] = useState(false);
 
   return (
     <>
@@ -34,11 +26,20 @@ export default function FrontPage(props) {
             setInputValues={setInputValues}
             firstValue={firstValue}
             setFirstValue={setFirstValue}
+            setIsShowResults={setIsShowResults}
+            setShuffledItems={setShuffledItems}
           />
         </div>
       </div>
       <div>
-        <ShowResults />
+        {isShowResults ? (
+          <ShowResults
+            shuffledItems={shuffledItems}
+            setIsShowResults={setIsShowResults}
+          />
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

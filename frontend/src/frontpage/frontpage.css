@@ -22,6 +22,16 @@ button {
   min-height: 2rem;
   width: fit-content;
   margin: 0.5rem;
+  border-radius: 10px;
+  background-color: white;
+  border: solid;
+  cursor: pointer;
+}
+
+li {
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  word-wrap: break-word;
 }
 
 .circle-button {
@@ -81,15 +91,18 @@ button {
 }
 
 .center-popup {
+  position:fixed;
+  top: 0; left: 0;
+  transform: translate(calc(50vw - 50%), calc(50vh - 50%));
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
-  z-index: 200;
 }
 
 .popup-content-container {
+  display: fixed;
   border-radius: 15px;
   max-height: 80vh;
   min-height: 40vh;
@@ -97,11 +110,12 @@ button {
   overflow: auto;
   background-color: white;
   margin: 16px;
+  z-index: 300;
 }
 
 .top-right {
   position: fixed;
-  left: 69vw;
+  top: -8px;
+  left: 39vw;
   z-index: 300;
-  margin: auto;
 }

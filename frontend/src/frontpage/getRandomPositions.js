@@ -1,8 +1,7 @@
-
 const apiRoute = "http://localhost:5000/getRandomPositions";
 
-export default function GetRandomPosition(unchangedItems, res, setRes) {
-	//console.log("\nasdasdasda" + unchangedItems + "\nasdasda");
+export default function GetRandomPosition(unchangedItems, setRes) {
+  //console.log("\nasdasdasda" + unchangedItems + "\nasdasda");
   //const [res, setRes] = useState();
   // useEffect(() => {
   //   retriveRandomPositions();
@@ -11,7 +10,7 @@ export default function GetRandomPosition(unchangedItems, res, setRes) {
     unchangedItems: unchangedItems,
   };
 
- 	retriveRandomPositions();
+  retriveRandomPositions();
 
   async function retriveRandomPositions() {
     const options = {

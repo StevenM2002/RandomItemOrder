@@ -1,11 +1,21 @@
 import "./frontpage.css";
 import circularPlusLogo from "./frontPageImages/circularPlus.png";
 import circularMinusLogo from "./frontPageImages/circularMinus.png";
+import GetRandomPositions from "./getRandomPositions";
 
-export default function AddItemForm({ renderedInputsIndex, setRenderedInputsIndex, inputValues, setInputValues, firstValue, setFirstValue }) {
-//  const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
-//  const [inputValues, setInputValues] = useState([]);
-//  const [firstValue, setFirstValue] = useState("");
+export default function AddItemForm({
+  renderedInputsIndex,
+  setRenderedInputsIndex,
+  inputValues,
+  setInputValues,
+  firstValue,
+  setFirstValue,
+  setIsShowResults,
+  setShuffledItems,
+}) {
+  //  const [renderedInputsIndex, setRenderedInputsIndex] = useState([]);
+  //  const [inputValues, setInputValues] = useState([]);
+  //  const [firstValue, setFirstValue] = useState("");
   // Make sure the value inside the textbox is the actual value after deletion
   function getValue(id) {
     const index = renderedInputsIndex.indexOf(id);
@@ -13,7 +23,7 @@ export default function AddItemForm({ renderedInputsIndex, setRenderedInputsInde
   }
 
   const myInput = (id) => (
-    <div style={myInputStyle}>
+    <div key={id} style={myInputStyle}>
       <input
         id={id}
         onChange={onTextChange}
@@ -90,15 +100,28 @@ export default function AddItemForm({ renderedInputsIndex, setRenderedInputsInde
     return myInput(i);
   });
 
+  //On submit of form set isShowResults to true
+  function onSubmit(e) {
+    e.preventDefault();
+    setIsShowResults(true);
+    const unchangedItems = [firstValue, ...inputValues];
+    GetRandomPositions(unchangedItems, setShuffledItems);
+  }
+
   return (
-    <form className="form-container">
+    <form className="form-container" autoComplete="off">
       {firstInputField}
       {renderToJsx}
       <button
+        key={"addNewInputButton"}
         className="circle-button"
         onClick={addNewInput}
         style={myAddButtonStyle}
+        type="button"
       ></button>
+      <button type="submit" style={mySubmitButtonStyle} onClick={onSubmit}>
+        Get your task order!
+      </button>
     </form>
   );
 }
@@ -117,3 +140,10 @@ const myInputStyle = {
   display: "grid",
   gridTemplateColumns: "100% auto",
 };
+
+const mySubmitButtonStyle = {
+  margin:"auto",
+  fontSize:"1rem",
+  padding:"0.8rem",
+  border:"solid 2px #1c352d"
+}
