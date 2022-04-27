@@ -3,7 +3,6 @@ import "./frontpage.css";
 import TitleBanner from "./titleBanner";
 import AddItemForm from "./addItemForm";
 import Instructions from "./instructions";
-import GetRandomPositions from "./getRandomPositions";
 import ShowResults from "./showResults";
 
 export default function FrontPage(props) {
@@ -35,6 +34,7 @@ export default function FrontPage(props) {
         {isShowResults ? (
           <ShowResults
             shuffledItems={shuffledItems}
+            setShuffledItems={setShuffledItems}
             setIsShowResults={setIsShowResults}
           />
         ) : (

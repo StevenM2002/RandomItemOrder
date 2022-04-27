@@ -1,8 +1,10 @@
 import "./frontpage.css";
 import circularCrossLogo from "./frontPageImages/circularCross.png";
+import circularRefreshLogo from "./frontPageImages/circularRefresh.png";
+import GetRandomPositions from "./getRandomPositions";
 export default function ShowResults({
   shuffledItems,
-  isShowResults,
+  setShuffledItems,
   setIsShowResults,
 }) {
   function handleCloseOnClick(e) {
@@ -13,8 +15,8 @@ export default function ShowResults({
   function shuffledItemToJSX() {
     return(
       <ol>
-        {shuffledItems.map((item) => (
-          <li>{item}</li>
+        {shuffledItems.map((item, index) => (
+          <li key={index} >{item}</li>
         ))}
       </ol>
     )
@@ -32,6 +34,10 @@ export default function ShowResults({
     </div>
   )
 
+  function handleRefreshItems(e) {
+    e.preventDefault();
+    GetRandomPositions(shuffledItems, setShuffledItems);
+  }
 
   return (
   	<div>
@@ -46,6 +52,7 @@ export default function ShowResults({
 	            style={closeButtonStyle}
           >
           </button>
+          <button onClick={handleRefreshItems} className="circle-button" style={refreshStyle}></button>
 	  			<div className="popup-content-container">
             {shuffledItems.length === 0 ? noItemsText : shuffledItemToJSX()}
 	  			</div>
@@ -54,6 +61,12 @@ export default function ShowResults({
 
   	</div>
   );
+}
+
+const refreshStyle = {
+  position:"fixed",
+  backgroundImage: `url(${circularRefreshLogo})`,
+  backgroundSize:"cover"
 }
 
 const closeButtonStyle = {
